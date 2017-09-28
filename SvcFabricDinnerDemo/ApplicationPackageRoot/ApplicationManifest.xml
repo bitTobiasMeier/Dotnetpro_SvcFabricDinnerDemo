@@ -14,7 +14,7 @@
     <Parameter Name="TableActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="TableActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="TableActorService_TargetReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="X509FindValue" DefaultValue="4fafd91ca730fc974ce4486ad5989d03" />
+    <Parameter Name="X509FindValue" DefaultValue="4892e4af140e92a2ee614954df29b710d20928d4" />
     <Parameter Name="KitchenActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="KitchenActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="KitchenActorService_TargetReplicaSetSize" DefaultValue="3" />
@@ -34,7 +34,7 @@
     <ServiceManifestRef ServiceManifestName="DinnerPlatformPkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides />
     <Policies>
-      <!--  <EndpointBindingPolicy EndpointRef="ServiceEndpoint" CertificateRef="TestCert1" />  -->
+      <EndpointBindingPolicy EndpointRef="ServiceEndpoint" CertificateRef="TestCert1" />
     </Policies>
   </ServiceManifestImport>
   <ServiceManifestImport>
