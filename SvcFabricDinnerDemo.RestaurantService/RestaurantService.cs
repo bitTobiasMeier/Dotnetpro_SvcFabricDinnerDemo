@@ -29,7 +29,7 @@ namespace SvcFabricDinnerDemo.RestaurantService
         }
 
         public RestaurantService(StatefulServiceContext serviceContext,
-            IReliableStateManagerReplica reliableStateManagerReplica)
+            IReliableStateManagerReplica2 reliableStateManagerReplica)
             : base(serviceContext, reliableStateManagerReplica)
         {
         }
