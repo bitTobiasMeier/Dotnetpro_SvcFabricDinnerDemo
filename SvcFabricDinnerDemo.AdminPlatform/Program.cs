@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Microsoft.ServiceFabric.Services.Runtime;
+using System;
 using System.Diagnostics;
-using System.Fabric;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.ServiceFabric.Services.Runtime;
-using SvcFabricDinnerDemo.ReliableServicesCore;
 
-namespace SvcFabricDinnerDemo.RestaurantService
+namespace SvcFabricDinnerDemo.AdminPlatform
 {
     internal static class Program
     {
@@ -22,16 +20,12 @@ namespace SvcFabricDinnerDemo.RestaurantService
                 // When Service Fabric creates an instance of this service type,
                 // an instance of the class is created in this host process.
 
-                ServiceRuntime.RegisterServiceAsync("RestaurantServiceType",
-                    delegate(StatefulServiceContext context)
-                    {
-                        var backupStore = new FileStoreCreator().CreateFileStore(context);
-                        return new RestaurantService(context,backupStore, ServiceEventSource.Current);
-                    }).GetAwaiter().GetResult();
+                ServiceRuntime.RegisterServiceAsync("AdminPlatformType",
+                    context => new AdminPlatform(context)).GetAwaiter().GetResult();
 
-                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(RestaurantService).Name);
+                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(AdminPlatform).Name);
 
-                // Prevents this host process from terminating so services keep running.
+                // Prevents this host process from terminating so services keeps running. 
                 Thread.Sleep(Timeout.Infinite);
             }
             catch (Exception e)

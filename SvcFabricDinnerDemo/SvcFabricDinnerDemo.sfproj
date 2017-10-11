@@ -29,6 +29,7 @@
     <None Include="Scripts\Deploy-FabricApplication.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SvcFabricDinnerDemo.AdminPlatform\SvcFabricDinnerDemo.AdminPlatform.csproj" />
     <ProjectReference Include="..\SvcFabricDinnerDemo.DinnerMenuService\SvcFabricDinnerDemo.DinnerMenuService.csproj" />
     <ProjectReference Include="..\SvcFabricDinnerDemo.DinnerPlatform\SvcFabricDinnerDemo.DinnerPlatform.csproj" />
     <ProjectReference Include="..\SvcFabricDinnerDemo.KitchenActor\SvcFabricDinnerDemo.KitchenActor.csproj" />
