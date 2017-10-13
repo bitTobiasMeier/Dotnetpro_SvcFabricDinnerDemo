@@ -117,6 +117,10 @@
       <Project>{BF029221-9704-4C1D-8072-0AD3B37D1699}</Project>
       <Name>SvcFabricDinnerDemo.OrderActor.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SvcFabricDinnerDemo.TableActor.Interfaces\SvcFabricDinnerDemo.TableActor.Interfaces.csproj">
+      <Project>{80ce2775-258c-4961-9a65-3b748db85399}</Project>
+      <Name>SvcFabricDinnerDemo.TableActor.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.ServiceFabric.Actors.2.8.211\build\Microsoft.ServiceFabric.Actors.targets" Condition="Exists('..\packages\Microsoft.ServiceFabric.Actors.2.8.211\build\Microsoft.ServiceFabric.Actors.targets')" />

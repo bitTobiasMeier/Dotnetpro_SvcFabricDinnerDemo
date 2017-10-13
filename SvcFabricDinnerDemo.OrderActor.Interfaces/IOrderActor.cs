@@ -13,6 +13,6 @@ namespace SvcFabricDinnerDemo.OrderActor.Interfaces
     public interface IOrderActor : IActor, IActorEventPublisher<IOrderEvents>
     {
         Task<Order> GetOrderAsync(CancellationToken cancellationToken);
-        Task<Order> AddOrderAsync(Order order, CancellationToken cancellationToken);
+        Task<Order> AddOrderAsync(Order order, string dish, CancellationToken cancellationToken);
     }
 }

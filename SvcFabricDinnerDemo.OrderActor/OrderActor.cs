@@ -9,6 +9,7 @@ using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.ServiceFabric.Actors.Client;
 using SvcFabricDinnerDemo.KitchenActor.Interfaces;
 using SvcFabricDinnerDemo.OrderActor.Interfaces;
+using SvcFabricDinnerDemo.TableActor.Interfaces;
 
 namespace SvcFabricDinnerDemo.OrderActor
 {
@@ -50,15 +51,18 @@ namespace SvcFabricDinnerDemo.OrderActor
             };
         }
 
-        public async Task<Order> AddOrderAsync(Order order, CancellationToken cancellationToken)
+        public async Task<Order> AddOrderAsync(Order order, string dishname, CancellationToken cancellationToken)
         {
             if (order == null) return null;
-            var contract = new OrderContract(order.RestaurantId, order.TableId, order.DishId,
-                order.Price,
+            var contract = new OrderContract(order.RestaurantId, order.TableId, order.DishId,dishname,
+                order.Price, 
                 DateTime.Now);
             await StateManager.SetStateAsync(OrderDataKey, contract, cancellationToken);
             await this.SetOrderStateAsync(OrderState.Ordered);
             order.OrderId = Id.GetGuidId();
+
+            var tableActor = new TableActorProxy().CreateActor(order.TableId);
+            await tableActor.AddOrder(new TableOrder() { Dish = dishname, OrderId = order.OrderId, Price = order.Price }, CancellationToken.None);
 
             //Register reminder
             await RegisterReminderAsync(
@@ -120,8 +124,6 @@ namespace SvcFabricDinnerDemo.OrderActor
         private async Task SetOrderStateAsync(OrderState state)
         {
             await StateManager.SetStateAsync(OrderStateKey, (int) state);
-            //  var events = GetEvent<IOrderEvents>();
-            //  events.OrderStateChanged(this.Id, state);
         }
 
         private async Task ProcessStateAsync()
@@ -176,7 +178,7 @@ namespace SvcFabricDinnerDemo.OrderActor
         [DataContract]
         private class OrderContract
         {
-            public OrderContract(Guid restaurantId, Guid tableId, Guid dishId, decimal price,
+            public OrderContract(Guid restaurantId, Guid tableId, Guid dishId, string dishname, decimal price,
                 DateTime? orderTime)
             {
                 RestaurantId = restaurantId;
@@ -184,6 +186,7 @@ namespace SvcFabricDinnerDemo.OrderActor
                 DishId = dishId;
                 Price = price;
                 OrderTime = orderTime;
+                Dishname = dishname;
             }
 
             [DataMember]
@@ -194,6 +197,9 @@ namespace SvcFabricDinnerDemo.OrderActor
 
             [DataMember]
             public Guid DishId { get; private set; }
+
+            [DataMember]
+            public string Dishname { get; private set; }
 
             [DataMember]
             public decimal Price { get; private set; }
