@@ -20,15 +20,12 @@ namespace SvcFabricDinnerDemo.DinnerPlatform.Controllers
             if (order == null) return null;
             try
             {
-                var tableActor = new TableActorProxy().CreateActor(order.TableId);
+                
                 order.OrderId = Guid.NewGuid();
                 var dish = await new MenuServiceProxyFactory().CreateServiceProxy(order.RestaurantId).GetDishAsync(order.RestaurantId, order.DishId);
                 order.Price = dish.Price;
                 var orderActor = new OrderActorProxy().CreateActor(order.OrderId);
-                await orderActor.AddOrderAsync(order, CancellationToken.None);
-
-                await tableActor.AddOrder(new TableOrder() { Dish = dish.Name, OrderId = order.OrderId, Price = dish.Price }, CancellationToken.None);
-
+                await orderActor.AddOrderAsync(order, dish.Name, CancellationToken.None);
                 return await orderActor.GetOrderAsync(CancellationToken.None);
             }
             catch (Exception ex)
