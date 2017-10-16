@@ -9,20 +9,22 @@ using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using SvcFabricDinnerDemo.DinnerMenuService.Interfaces;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 
 namespace SvcFabricDinnerDemo.DinnerMenuService
 {
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class DinnerMenuService : StatefulService, IDinnerMenuService, IDinnerMenuAdminService
+    internal sealed class DinnerMenuService : BackupRestoreStatefulService, IDinnerMenuService,
+        IDinnerMenuAdminService
     {
         private readonly IDishStateManager _dishStateManager;
         private const string RestaurantIdToMenucardsDictionaryname = "dishDic";
 
         public DinnerMenuService(StatefulServiceContext context, IDishStateManager dishStateManager,
-   IReliableStateManagerReplica2 stateManager)
-   : base(context, stateManager)
+   IReliableStateManagerReplica2 stateManager, IFileStore fileStore, IServiceEventSource serviceEventSource)
+   : base(context, stateManager, fileStore,serviceEventSource)
         {
             _dishStateManager = dishStateManager;
         }
@@ -36,6 +38,9 @@ namespace SvcFabricDinnerDemo.DinnerMenuService
                 return result;
             }
         }
+
+        
+
         public async Task<List<Dish>> GetDishesAsync(Guid restaurantId)
         {
             using (var tx = this._dishStateManager.CreateTransaction())

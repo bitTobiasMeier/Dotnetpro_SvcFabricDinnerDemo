@@ -6,16 +6,20 @@ namespace SvcFabricDinnerDemo.RestaurantService.Interfaces
 {
     public class RestaurantServiceProxyFactory
     {
-        private readonly Uri _servicename = new Uri("fabric:/SvcFabricDinnerDemo/RestaurantService");
+        private static readonly Uri _servicename = new Uri("fabric:/SvcFabricDinnerDemo/RestaurantService");
+        
         public RestaurantServiceProxyFactory()
         { }
+
+        public static Uri Servicename => _servicename;
+
         public IRestaurantService CreateServiceProxy()
         {
-            return ServiceProxy.Create<IRestaurantService>(this._servicename, new ServicePartitionKey(0));
+            return ServiceProxy.Create<IRestaurantService>(_servicename, new ServicePartitionKey(0));
         }
         public IRestaurantAdminService CreateAdminServiceProxy()
         {
-            return ServiceProxy.Create<IRestaurantAdminService>(this._servicename, new ServicePartitionKey(0));
+            return ServiceProxy.Create<IRestaurantAdminService>(_servicename, new ServicePartitionKey(0));
         }
     }
 }

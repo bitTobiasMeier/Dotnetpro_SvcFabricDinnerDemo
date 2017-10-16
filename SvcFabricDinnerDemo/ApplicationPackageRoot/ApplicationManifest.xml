@@ -19,7 +19,7 @@
     <Parameter Name="KitchenActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="KitchenActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="KitchenActorService_TargetReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="BackupDirectory" DefaultValue="c:\temp\PhotoAwardBackups\" />
+    <Parameter Name="BackupDirectory" DefaultValue="c:\temp\dotnetpro_svcfabricdinnerdemo\" />
     <Parameter Name="AzureStorageConnectionString" DefaultValue="" />
     <Parameter Name="BackupRestoreFileStoreType" DefaultValue="local" />
   </Parameters>
@@ -32,7 +32,17 @@
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="DinnerMenuServicePkg" ServiceManifestVersion="1.0.0" />
-    <ConfigOverrides />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBackupRestore">
+            <Parameter Name="BackupDirectory" Value="[BackupDirectory]" />
+            <Parameter Name="AzureStorageConnectionString" Value="[AzureStorageConnectionString]" />
+            <Parameter Name="BackupRestoreFileStoreType" Value="[BackupRestoreFileStoreType]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="RestaurantServicePkg" ServiceManifestVersion="1.0.0" />
