@@ -11,7 +11,10 @@ using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using SvcFabricDinnerDemo.DinnerMenuService.Interfaces;
+using SvcFabricDinnerDemo.KitchenActor.Interfaces;
+using SvcFabricDinnerDemo.OrderActor.Interfaces;
 using SvcFabricDinnerDemo.RestaurantService.Interfaces;
+using SvcFabricDinnerDemo.TableActor.Interfaces;
 
 namespace SvcFabricDinnerDemo.AdminPlatform
 {
@@ -44,6 +47,9 @@ namespace SvcFabricDinnerDemo.AdminPlatform
                                             .AddSingleton<StatelessServiceContext>(serviceContext)
                                             .AddTransient<IRestaurantBackupRestoreManager, RestaurantBackupRestoreManager>()
                                             .AddTransient<IDinnerMenuBackupRestoreManager, DinnerMenuBackupRestoreManager>()
+                                            .AddTransient<IKitchenActorServiceBackupRestoreManager, KitchenActorServiceBackupRestoreManager>()
+                                            .AddTransient<IOrderActorServiceBackupRestoreManager, OrderActorServiceBackupRestoreManager>()
+                                            .AddTransient<ITableActorServiceBackupRestoreManager, TableActorServiceBackupRestoreManager>()
                                             )
                                     .UseContentRoot(Directory.GetCurrentDirectory())
                                     .UseStartup<Startup>()

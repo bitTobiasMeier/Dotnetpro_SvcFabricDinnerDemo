@@ -67,12 +67,45 @@
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="SvcFabricDinnerDemo.OrderActorPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBackupRestore">
+            <Parameter Name="BackupDirectory" Value="[BackupDirectory]" />
+            <Parameter Name="AzureStorageConnectionString" Value="[AzureStorageConnectionString]" />
+            <Parameter Name="BackupRestoreFileStoreType" Value="[BackupRestoreFileStoreType]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="SvcFabricDinnerDemo.KitchenActorPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBackupRestore">
+            <Parameter Name="BackupDirectory" Value="[BackupDirectory]" />
+            <Parameter Name="AzureStorageConnectionString" Value="[AzureStorageConnectionString]" />
+            <Parameter Name="BackupRestoreFileStoreType" Value="[BackupRestoreFileStoreType]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="SvcFabricDinnerDemo.TableActorPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBackupRestore">
+            <Parameter Name="BackupDirectory" Value="[BackupDirectory]" />
+            <Parameter Name="AzureStorageConnectionString" Value="[AzureStorageConnectionString]" />
+            <Parameter Name="BackupRestoreFileStoreType" Value="[BackupRestoreFileStoreType]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
   </ServiceManifestImport>
   <DefaultServices>
     <!-- The section below creates instances of service types, when an instance of this 

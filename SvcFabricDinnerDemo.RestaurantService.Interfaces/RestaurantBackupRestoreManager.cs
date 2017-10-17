@@ -11,7 +11,7 @@ namespace SvcFabricDinnerDemo.RestaurantService.Interfaces
             
         }
 
-        public async Task RestoreFullBackUpAsync(string nameOfBackupset)
+        public async Task RestoreFullBackupAsync(string nameOfBackupset)
         {
             var proxy = new RestaurantServiceProxyFactory().CreateAdminServiceProxy();
             await proxy.RestoreServiceAsync(nameOfBackupset);

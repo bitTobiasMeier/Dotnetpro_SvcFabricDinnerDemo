@@ -4,6 +4,7 @@ using System.Fabric;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Actors.Runtime;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 
 namespace SvcFabricDinnerDemo.KitchenActor
 {
@@ -22,7 +23,11 @@ namespace SvcFabricDinnerDemo.KitchenActor
                 // For more information, see https://aka.ms/servicefabricactorsplatform
 
                 ActorRuntime.RegisterActorAsync<KitchenActor>(
-                   (context, actorType) => new ActorService(context, actorType)).GetAwaiter().GetResult();
+                    delegate(StatefulServiceContext context, ActorTypeInformation actorType)
+                    {
+                        var backupStore = new FileStoreCreator().CreateFileStore(context);
+                        return new KitchenActorService(context, actorType,backupStore, ActorEventSource.Current);
+                    }).GetAwaiter().GetResult();
 
                 Thread.Sleep(Timeout.Infinite);
             }

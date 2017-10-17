@@ -4,6 +4,7 @@ using System.Fabric;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Actors.Runtime;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 
 namespace SvcFabricDinnerDemo.TableActor
 {
@@ -22,7 +23,11 @@ namespace SvcFabricDinnerDemo.TableActor
                 // For more information, see https://aka.ms/servicefabricactorsplatform
 
                 ActorRuntime.RegisterActorAsync<TableActor>(
-                   (context, actorType) => new ActorService(context, actorType)).GetAwaiter().GetResult();
+                    delegate(StatefulServiceContext context, ActorTypeInformation actorType)
+                    {
+                        var backupStore = new FileStoreCreator().CreateFileStore(context);
+                        return new TableActorService(context, actorType,backupStore,ActorEventSource.Current);
+                    }).GetAwaiter().GetResult();
 
                 Thread.Sleep(Timeout.Infinite);
             }

@@ -1,20 +1,27 @@
 ﻿using System;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 
 namespace SvcFabricDinnerDemo.TableActor.Interfaces
 {
     public class TableActorProxy
     {
-        
-        private readonly Uri _servicename = new Uri("fabric:/SvcFabricDinnerDemo/TableActorService");
-        
+        public static Uri ServiceUrl { get; } = new Uri("fabric:/SvcFabricDinnerDemo/TableActorService");
 
-        public ITableActor CreateActor(Guid orderId)
+
+        public ITableActor CreateActor(Guid tableId)
         {
-            var actorId = new ActorId(orderId);
-            return ActorProxy.Create<ITableActor>(actorId, this._servicename);
+            var actorId = new ActorId(tableId);
+            return ActorProxy.Create<ITableActor>(actorId, ServiceUrl);
         }
 
     }
+
+    public interface ITableActorService : IBackupRestoreActorService
+    {
+
+    }
+
+
 }

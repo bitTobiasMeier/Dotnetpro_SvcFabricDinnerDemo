@@ -6,7 +6,7 @@ namespace SvcFabricDinnerDemo.DinnerMenuService.Interfaces
     public interface IDinnerMenuBackupRestoreManager
     {
         Task TakeFullBackUpAsync(string nameOfBackupset);
-        Task RestoreFullBackUpAsync(string nameOfBackupset);
+        Task RestoreFullBackupAsync(string nameOfBackupset);
     }
 
     public class DinnerMenuBackupRestoreManager : IDinnerMenuBackupRestoreManager
@@ -27,7 +27,7 @@ namespace SvcFabricDinnerDemo.DinnerMenuService.Interfaces
 
         }
 
-        public async Task RestoreFullBackUpAsync(string nameOfBackupset)
+        public async Task RestoreFullBackupAsync(string nameOfBackupset)
         {
             var proxyFactory = new MenuServiceProxyFactory();
             using (var client = new FabricClient())

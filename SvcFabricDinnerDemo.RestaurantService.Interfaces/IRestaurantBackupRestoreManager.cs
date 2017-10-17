@@ -5,6 +5,6 @@ namespace SvcFabricDinnerDemo.RestaurantService.Interfaces
     public interface IRestaurantBackupRestoreManager
     {
         Task TakeFullBackUpAsync(string nameOfBackupset);
-        Task RestoreFullBackUpAsync(string nameOfBackupset);
+        Task RestoreFullBackupAsync(string nameOfBackupset);
     }
 }
