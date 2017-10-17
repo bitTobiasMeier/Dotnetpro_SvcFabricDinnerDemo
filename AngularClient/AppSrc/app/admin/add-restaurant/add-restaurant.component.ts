@@ -23,6 +23,7 @@ export class AddRestaurantComponent implements OnInit {
     this.adminClient.create (restaurant).subscribe( addedRestaurant => {
       this.message = 'Restaurant ' + addedRestaurant.name  + '  added';
       this.restaurantAdded.emit(addedRestaurant);
+      this.name = "";
     },
     error  => {
       this.message = 'Fehler beim Speichern ';

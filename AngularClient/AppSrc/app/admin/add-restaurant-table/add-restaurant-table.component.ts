@@ -11,7 +11,7 @@ export class AddRestaurantTableComponent implements OnInit {
   @Input() restaurantId: string;
   @Output() tableAdded = new EventEmitter<RestaurantTable>();
   message: string;
-  tablenr: number;
+  tablenr: number ;
 
   constructor(private restaurantAdminClient: RestaurantAdminClient) { }
 
@@ -25,6 +25,7 @@ export class AddRestaurantTableComponent implements OnInit {
     this.restaurantAdminClient.createTable (this.restaurantId, table).subscribe( addedTable => {
       this.message = 'Tisch ' + addedTable.tablenr + ' wurde hinzugefügt';
       this.tableAdded.emit(addedTable);
+      this.tablenr = null;
     },
     error  => {
       this.message = 'Fehler beim Speichern ';
