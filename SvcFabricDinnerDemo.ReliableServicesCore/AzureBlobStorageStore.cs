@@ -29,9 +29,6 @@ namespace SvcFabricDinnerDemo.ReliableServicesCore
             CloudStorageAccount storageAccount = 
                  CloudStorageAccount.Parse(_backupRestoreConfiguration.BackupStorageConnectionString);
 
-
-            /*_blobClient = new CloudBlobClient(new Uri(_backupRestoreConfiguration.BlobEndpointAddress),
-                storageCredentials);*/
             _blobClient = storageAccount.CreateCloudBlobClient();
         }
 
@@ -43,7 +40,7 @@ namespace SvcFabricDinnerDemo.ReliableServicesCore
             var fullArchiveDirectoryInfo = new DirectoryInfo(fullArchiveDirectory);
             fullArchiveDirectoryInfo.Create();
 
-            var blobName = $"{Guid.NewGuid().ToString("N")}_{backupName}_{_partitionName}_{"Backup.zip"}";
+            var blobName = $"{backupName}_{_partitionName}_{"Backup.zip"}";
             var fullArchivePath = Path.Combine(fullArchiveDirectory, "Backup.zip");
 
             ZipFile.CreateFromDirectory(backupInfo.Directory, fullArchivePath, CompressionLevel.Fastest, false);
@@ -62,7 +59,7 @@ namespace SvcFabricDinnerDemo.ReliableServicesCore
 
         public void WriteRestoreInformation(string nameOfBackupSet)
         {
-            var blobName = $"{Guid.NewGuid().ToString("N")}_{nameOfBackupSet}_{_partitionName}_{"Backup.zip"}";
+            var blobName = $"{nameOfBackupSet}_{_partitionName}_{"Backup.zip"}";
             var container = GetBlobContainer();
             var lastBackupBlob = container.GetBlockBlobReference(blobName);
 
