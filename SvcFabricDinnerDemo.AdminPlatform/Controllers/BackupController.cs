@@ -22,14 +22,14 @@ namespace SvcFabricDinnerDemo.AdminPlatform.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{name}")]
-        public async Task<string> Get(string name)
+        [HttpPost]
+        public async Task<string> Post(string nameOfBackupSet)
         {
-            var menuSvcTask = this._dinnerMenuBackupRestoreManager.TakeFullBackUpAsync(name);
-            var restaurantSvcTask = this._restaurantBackupRestoreManager.TakeFullBackUpAsync(name);
+            var menuSvcTask = this._dinnerMenuBackupRestoreManager.TakeFullBackUpAsync(nameOfBackupSet);
+            var restaurantSvcTask = this._restaurantBackupRestoreManager.TakeFullBackUpAsync(nameOfBackupSet);
             await restaurantSvcTask;
             await menuSvcTask;
-            return "Backup of backupset" + name + " succeeded!";
+            return "Backup of backupset" + nameOfBackupSet + " succeeded!";
 
         }
 

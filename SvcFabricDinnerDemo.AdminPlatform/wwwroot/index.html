@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Restaurantservice Systemadministration</title>
+</head>
+<body>
+<h1>Restaurantservice Systemadministration</h1>
+<h2>Backup</h2>
+<form action="api/backup/" method="post">
+    Name des Backups <input type="text" name="nameOfBackupSet"/>
+    <input type="submit" value="Backup" />
+
+</form>
+    
+
+<hr/>
+<h2>Restore</h2>
+    
+<form action="api/restore/" method="post">
+    Name des wiederherzustellenden Backupsets <input type="text" name="nameOfBackupSet"/>
+    <input type="submit" value="Restore" />
+
+</form>
+</body>
+</html>
