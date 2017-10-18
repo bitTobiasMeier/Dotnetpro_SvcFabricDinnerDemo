@@ -19,6 +19,7 @@ export class AddDishComponent implements OnInit {
   constructor(private restaurantAdminClient: RestaurantAdminClient) { }
 
   save (value: any) {
+    if (this.name && this.price && this.price > 0 && this.imageUrl && this.description){    
     const dish = new Dish();
     dish.name = this.name;
     dish.price = this.price;
@@ -27,11 +28,19 @@ export class AddDishComponent implements OnInit {
       this.restaurantAdminClient.addDish(this.restaurantId, dish).subscribe(
         (result) => {
             this.dishAdded.emit ( result );
+            this.name = "";
+            this.price = null;
+            this.description = "";
+            this.imageUrl = "";
+            this.message= "Gericht wurde hinzugefügt";
         },
         (error) => {
             console.log(error);
         }
       );
+    } else {
+      this.message = "Bitte alle Felder angeben!";
+    }
   }
 
   ngOnInit() {

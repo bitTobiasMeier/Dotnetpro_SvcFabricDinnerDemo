@@ -1,5 +1,12 @@
 webpackJsonp(["styles"],{
 
+/***/ "../../../../../AppSrc/assets/foto5.jpg":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "foto5.cfa2071c7cc4d271576d.jpg";
+
+/***/ }),
+
 /***/ "../../../../../AppSrc/styles.sass":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -77,7 +84,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\nbody {\n  background: #blue; }\n\n.bitcolor {\n  background-color: #blue; }\n\n.bitfooter {\n  padding: 10px;\n  background: #blue; }\n\n.card {\n  margin: 5px; }\n\n.card-body {\n  padding: 5px; }\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\nbody {\n  background: white;\n  margin: 0px;\n  padding: 0px; }\n\n.bitcolor {\n  background-color: white; }\n\n.bitfooter {\n  padding: 10px;\n  background: white; }\n\n.dishimg {\n  width: 100px; }\n\n#header {\n  background-image: url(" + __webpack_require__("../../../../../AppSrc/assets/foto5.jpg") + ");\n  height: 150px;\n  width: 100%;\n  padding: 10px;\n  background-repeat: no-repeat;\n  background-size: cover;\n  border: 0px solid white; }\n\n#header h1 {\n  font-size: 180%; }\n\n.navbar {\n  background-color: #ddc073;\n  text-align: center; }\n\n#navbarSupportedContent ul li a {\n  color: black; }\n\n#navbarSupportedContent ul li a:hover {\n  color: white;\n  border-style: solid;\n  border-width: 0 0 1px 0;\n  border-color: white; }\n\n.card-select {\n  padding: 10px; }\n\n.btn {\n  background-color: #999999;\n  border: 0px solid white; }\n\n.btn:hover {\n  background-color: #d8d8d8;\n  border: 0px solid white;\n  color: black; }\n\n#button {\n  color: white; }\n\n.selected {\n  font: 250% \"Freestyle Script\";\n  font-weight: bolder; }\n\n.selected-message {\n  color: #39a512; }\n\n#card-dish {\n  padding: 2%;\n  float: left;\n  height: 400px; }\n\n#card-dish div a {\n  float: left;\n  margin-right: 10px; }\n\n#card-dish div img {\n  margin-top: 10px;\n  width: 100%; }\n\n.menue-title {\n  font: 250% \"Freestyle Script\";\n  text-align: center;\n  margin-top: 10px; }\n\n.menue-text {\n  text-align: center; }\n\n.card-select {\n  margin-right: 10px; }\n\n.card, .card-kitchen {\n  margin-right: 5%;\n  float: left;\n  padding: 10px; }\n\n.card-header {\n  background-color: #ddc073; }\n\n#adminNeuesRegister {\n  margin-bottom: 10px; }\n\n#anzahl {\n  text-align: center; }\n\n.card-deck {\n  width: 100%;\n  position: block;\n  margin: 0px auto; }\n\n.adminTableNumber {\n  margin-bottom: 2%;\n  width: 100%;\n  padding: 2%;\n  border: 1px solid gray; }\n\n.card-kitchen {\n  border: 1px solid gray;\n  margin-bottom: 10px; }\n\n.card-select-dish a {\n  cursor: pointer; }\n", ""]);
 
 // exports
 

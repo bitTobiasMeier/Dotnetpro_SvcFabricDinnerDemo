@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "../../../../../AppSrc/$$_gendir lazy recursive";
 /***/ "../../../../../AppSrc/app/Admin/add-restaurant/add-restaurant.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" style=\" border-color: #333;\">\r\n    <div class=\"card-header bg-primary\">Neues Restaurant: </div>\r\n    <b>Neues Restaurant</b>\r\n    <form #form=\"ngForm\" (ngSubmit)=\"save(form.value)\" class=\"form-horizontal\">\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"name\" class=\"control-label col-xs-1\">Restaurantname</label>\r\n        <div class=\"col-xs-3\">\r\n          <input type=\"text\" name=\"name\" ngModel [(ngModel)]=\"name\" class=\"form-control\">\r\n        </div>\r\n      </div>\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-xs-4\">\r\n          <span>{{message}}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <div class=\"col-xs-4\">\r\n          <button type=\"submit\" class=\"btn btn-default\">Anlegen</button> </div>\r\n      </div>\r\n    </form>\r\n  </div>\r\n\r\n"
+module.exports = "<div class=\"card\">\r\n    <div class=\"card-header\">Neues Restaurant: </div>\r\n\r\n    <form #form=\"ngForm\" (ngSubmit)=\"save(form.value)\" class=\"form-horizontal\">\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"name\" class=\"control-label col-xs-1\">Restaurantname</label>\r\n        <div class=\"col-xs-3\">\r\n          <input type=\"text\" name=\"name\" ngModel [(ngModel)]=\"name\" class=\"form-control\">\r\n        </div>\r\n      </div>\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-xs-4\">\r\n          <span class=\"selected-message\">{{message}}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <div class=\"col-xs-4\">\r\n          <button type=\"submit\" class=\"btn btn-default\" id=\"button\">Anlegen</button> </div>\r\n      </div>\r\n    </form>\r\n  </div>\r\n\r\n"
 
 /***/ }),
 
@@ -112,6 +112,7 @@ var AddRestaurantComponent = (function () {
                 this.adminClient.create(restaurant).subscribe(function (addedRestaurant) {
                     _this.message = 'Restaurant ' + addedRestaurant.name + '  added';
                     _this.restaurantAdded.emit(addedRestaurant);
+                    _this.name = "";
                 }, function (error) {
                     _this.message = 'Fehler beim Speichern ';
                     if (error.message) {
@@ -209,7 +210,7 @@ var AdminRestaurantComponent = (function () {
 /***/ "../../../../../AppSrc/app/admin/add-dish/add-dish.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" style=\" border-color: #333; \">\r\n  <div class=\"card-header bg-primary\">Neues Gericht: </div>\r\n  <div class=\"card-body\">\r\n    <form #form=\"ngForm\" (ngSubmit)=\"save(form.value)\" class=\"form-horizontal\">\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"name\" class=\"control-label col-xs-1\">Gericht</label>\r\n        <div class=\"col-xs-3\">\r\n          <input type=\"text\" name=\"name\" ngModel [(ngModel)]=\"name\" class=\"form-control\">\r\n        </div>\r\n        <label for=\"description\" class=\"control-label col-xs-1\">Beschreibung</label>\r\n        <div class=\"col-xs-3\">\r\n          <input type=\"text\" name=\"description\" ngModel [(ngModel)]=\"description\" class=\"form-control\">\r\n        </div>\r\n        <label for=\"imageUrl\" class=\"control-label col-xs-1\">Url Bild </label>\r\n        <div class=\"col-xs-3\">\r\n          <input type=\"text\" name=\"imageUrl\" ngModel [(ngModel)]=\"imageUrl\" class=\"form-control\">\r\n        </div>\r\n        <label for=\"price\" class=\"control-label col-xs-1\">Preis</label>\r\n        <div class=\"col-xs-3\">\r\n          <input type=\"number\" name=\"price\" ngModel [(ngModel)]=\"price\" class=\"form-control\">\r\n        </div>\r\n      </div>\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-xs-4\">\r\n          <span>{{message}}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <div class=\"col-xs-4\">\r\n          <button type=\"submit\" class=\"btn btn-default\">Anlegen</button> </div>\r\n      </div>\r\n    </form>\r\n\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div id=\"adminNeuesRegister\">\r\n  <div class=\"card-header\">Neues Gericht: </div>\r\n  <div class=\"card-body\">\r\n    <form #form=\"ngForm\" (ngSubmit)=\"save(form.value)\" class=\"form-horizontal\">\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <label for=\"name\" class=\"control-label col-xs-1\">Gericht</label>\r\n        <div class=\"col-xs-3\">\r\n          <input type=\"text\" name=\"name\" ngModel [(ngModel)]=\"name\" class=\"form-control\">\r\n        </div>\r\n        <label for=\"description\" class=\"control-label col-xs-1\">Beschreibung</label>\r\n        <div class=\"col-xs-3\">\r\n          <input type=\"text\" name=\"description\" ngModel [(ngModel)]=\"description\" class=\"form-control\">\r\n        </div>\r\n        <label for=\"imageUrl\" class=\"control-label col-xs-1\">Url Bild </label>\r\n        <div class=\"col-xs-3\">\r\n          <input type=\"text\" name=\"imageUrl\" ngModel [(ngModel)]=\"imageUrl\" class=\"form-control\">\r\n        </div>\r\n        <label for=\"price\" class=\"control-label col-xs-1\">Preis</label>\r\n        <div class=\"col-xs-3\">\r\n          <input type=\"number\" name=\"price\" ngModel [(ngModel)]=\"price\" class=\"form-control\">\r\n        </div>\r\n      </div>\r\n\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"col-xs-4\">\r\n          <span class=\"selected-message\">{{message}}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <div class=\"col-xs-4\">\r\n          <button type=\"submit\" class=\"btn btn-default\" id=\"button\">Anlegen</button> </div>\r\n      </div>\r\n    </form>\r\n\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -256,16 +257,26 @@ var AddDishComponent = (function () {
     }
     AddDishComponent.prototype.save = function (value) {
         var _this = this;
-        var dish = new __WEBPACK_IMPORTED_MODULE_0__shared_Controllers_generated__["c" /* Dish */]();
-        dish.name = this.name;
-        dish.price = this.price;
-        dish.description = this.description;
-        dish.imageUrl = this.imageUrl;
-        this.restaurantAdminClient.addDish(this.restaurantId, dish).subscribe(function (result) {
-            _this.dishAdded.emit(result);
-        }, function (error) {
-            console.log(error);
-        });
+        if (this.name && this.price && this.price > 0 && this.imageUrl && this.description) {
+            var dish = new __WEBPACK_IMPORTED_MODULE_0__shared_Controllers_generated__["c" /* Dish */]();
+            dish.name = this.name;
+            dish.price = this.price;
+            dish.description = this.description;
+            dish.imageUrl = this.imageUrl;
+            this.restaurantAdminClient.addDish(this.restaurantId, dish).subscribe(function (result) {
+                _this.dishAdded.emit(result);
+                _this.name = "";
+                _this.price = null;
+                _this.description = "";
+                _this.imageUrl = "";
+                _this.message = "Gericht wurde hinzugefügt";
+            }, function (error) {
+                console.log(error);
+            });
+        }
+        else {
+            this.message = "Bitte alle Felder angeben!";
+        }
     };
     AddDishComponent.prototype.ngOnInit = function () {
     };
@@ -296,7 +307,7 @@ var AddDishComponent = (function () {
 /***/ "../../../../../AppSrc/app/admin/add-restaurant-table/add-restaurant-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" style=\" border-color: #333;\">\r\n    <div class=\"card-header bg-primary\">Neuer Tisch: </div>\r\n    <div class=\"card-body\">\r\n<form #form=\"ngForm\" (ngSubmit)=\"save(form.value)\" class=\"form-horizontal\">\r\n\r\n\r\n        <div class=\"form-group\">\r\n          <label for=\"name\" class=\"control-label col-xs-1\">Tablenumber:</label>\r\n          <div class=\"col-xs-1\">\r\n            <input type=\"text\" name=\"tablenr\" ngModel [(ngModel)]=\"tablenr\" class=\"form-control \">\r\n          </div>\r\n        </div>\r\n\r\n\r\n        <div class=\"form-group\">\r\n          <div class=\"col-xs-4\">\r\n            <span>{{message}}</span>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <div class=\"col-xs-4\">\r\n            <button type=\"submit\" class=\"btn btn-default\">Anlegen</button> </div>\r\n        </div>\r\n      </form>\r\n</div>\r\n</div>\r\n"
+module.exports = "<div id=\"adminNeuesRegister\">\r\n    <div class=\"card-header\">Neuer Tisch:</div>\r\n    <div class=\"card-body\">\r\n      <form #form=\"ngForm\" (ngSubmit)=\"save(form.value)\" class=\"form-horizontal\">\r\n\r\n\r\n              <div class=\"form-group\">\r\n                <label for=\"name\" class=\"control-label col-xs-1\">Tischnummer:</label>\r\n                <div class=\"col-xs-1\">\r\n                  <input type=\"text\" name=\"tablenr\" ngModel [(ngModel)]=\"tablenr\" class=\"form-control \">\r\n                </div>\r\n              </div>\r\n\r\n\r\n              <div class=\"form-group\">\r\n                <div class=\"col-xs-4\">\r\n                  <span class=\"selected-message\">{{message}}</span>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <div class=\"col-xs-4\">\r\n                  <button type=\"submit\" class=\"btn btn-default\" id=\"button\">Anlegen</button> </div>\r\n              </div>\r\n            </form>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -386,8 +397,9 @@ var AddRestaurantTableComponent = (function () {
                 table = new __WEBPACK_IMPORTED_MODULE_0__shared_Controllers_generated__["j" /* RestaurantTable */]();
                 table.tablenr = this.tablenr;
                 this.restaurantAdminClient.createTable(this.restaurantId, table).subscribe(function (addedTable) {
-                    _this.message = 'Table ' + addedTable.tablenr + ' + added';
+                    _this.message = 'Tisch ' + addedTable.tablenr + ' wurde hinzugefügt';
                     _this.tableAdded.emit(addedTable);
+                    _this.tablenr = null;
                 }, function (error) {
                     _this.message = 'Fehler beim Speichern ';
                     if (error.message) {
@@ -428,7 +440,7 @@ var AddRestaurantTableComponent = (function () {
 /***/ "../../../../../AppSrc/app/admin/admin.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Administration</h3>\r\n\r\n<div  style=\"max-width: 30rem;\" >\r\n<dinner-add-restaurant (restaurantAdded)=\"restaurantAdded($event)\"></dinner-add-restaurant>\r\n\r\n</div>\r\n\r\n  <div [hidden]='restaurants.length == 0'>\r\n    <div>Anzahl Restaurants: {{restaurants.length}}</div>\r\n\r\n    <div class=\"card  mb-6\" *ngFor=\"let restaurant of restaurants\">\r\n        <dinner-restaurant-detail [restaurant]=\"restaurant\" ></dinner-restaurant-detail>\r\n  </div>\r\n</div>\r\n<a [routerLink]=\"['/admin']\">Zurück zur Übersicht</a>\r\n\r\n"
+module.exports = "<div class=\"card col-12\" style=\"border: 0px solid white\">\r\n  <h3>Administration</h3>\r\n\r\n  <div class=\"card col-6\" style=\"border: 0px\">\r\n  <dinner-add-restaurant (restaurantAdded)=\"restaurantAdded($event)\"></dinner-add-restaurant>\r\n  </div><br/>\r\n\r\n  <div [hidden]='restaurants.length == 0' class=\"col-12\">\r\n      <div class=\"card-header col-6\">Anzahl Restaurants: {{restaurants.length}}</div> <br/>\r\n\r\n      <div class=\"card  mb-6\" *ngFor=\"let restaurant of restaurants\" style=\"background-color: #d7dae0\">\r\n          <dinner-restaurant-detail [restaurant]=\"restaurant\"></dinner-restaurant-detail>\r\n       </div> \r\n  </div>\r\n  <br/>\r\n  <a [routerLink]=\"['/']\">Zurück zur Übersicht</a>\r\n\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -499,7 +511,7 @@ var AdminComponent = (function () {
 /***/ "../../../../../AppSrc/app/admin/menucard-administration/menucard-administration.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-deck\">\r\n\r\n        <div class=\"card bg-primary\" style=\"background-color: #333; border-color: #333;\" *ngFor=\"let dish of dishes\">\r\n          <div class=\"card-block \">\r\n              <img class=\"card-img-top\" [src]=\"dish.imageUrl\" [alt]=\"dish.name\">\r\n           <h5 class=\"card-title\"> {{dish.name}}</h5>\r\n           <div class=\"card-text\">{{dish.description}} €</div>\r\n           <div class=\"card-text\">Preis: {{dish.price}} €</div>\r\n          </div>\r\n        </div>\r\n    </div>\r\n"
+module.exports = "<div class=\"card-deck\">\r\n\r\n        <div class=\"adminTableNumber\" *ngFor=\"let dish of dishes\">\r\n          <div class=\"card-block\">\r\n              <img class=\"card-img-top\" [src]=\"dish.imageUrl\" [alt]=\"dish.name\">\r\n           <h5 class=\"card-title\"> {{dish.name}}</h5>\r\n           <div class=\"card-text\">{{dish.description}} €</div>\r\n           <div class=\"card-text\">Preis: {{dish.price}} €</div>\r\n          </div>\r\n        </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -568,7 +580,7 @@ var MenucardAdministrationComponent = (function () {
 /***/ "../../../../../AppSrc/app/admin/restaurant-detail/restaurant-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-header bg-primary\">{{restaurant.name}}</div>\r\n<div class=\"card-body\">\r\n  <div class=\"card-deck\">\r\n    <div class=\"card\">\r\n      <div class=\"card-header\">{{restaurantTables.length}} Tisch(e)</div>\r\n      <div class=\"card-body\">\r\n        <dinner-add-restaurant-table [restaurantId]=\"restaurant.id\" (tableAdded)=\"restaurantTableAdded($event)\"></dinner-add-restaurant-table>\r\n        <dinner-restaurant-tables [restaurantId]=\"restaurant.id\" [restaurantTables]=\"restaurantTables\"> </dinner-restaurant-tables>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"card\">\r\n      <div class=\"card-header\">{{dishes.length}} Gericht(e)</div>\r\n      <div class=\"card-body\">\r\n        <dinner-add-dish [restaurantId]=\"restaurant.id\" (dishAdded)=\"dishAdded($event)\"></dinner-add-dish>\r\n        <dinner-menucard-administration [restaurantId]=\"restaurant.id\" [dishes]=\"dishes\"></dinner-menucard-administration>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n  <hr>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"card-header\">{{restaurant.name}}</div>\r\n<div class=\"card-body\">\r\n  <div class=\"card-deck\">\r\n    <div class=\"card\">\r\n      <p id=\"anzahl\"><b>{{restaurantTables.length}} Tisch(e)</b></p>\r\n      <div class=\"card-body\">\r\n        <dinner-add-restaurant-table [restaurantId]=\"restaurant.id\" (tableAdded)=\"restaurantTableAdded($event)\"></dinner-add-restaurant-table>\r\n        <dinner-restaurant-tables [restaurantId]=\"restaurant.id\" [restaurantTables]=\"restaurantTables\"> </dinner-restaurant-tables>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"card\">\r\n      <p id=\"anzahl\"><b>{{dishes.length}} Gericht(e)</b></p>\r\n      <div class=\"card-body\">\r\n        <dinner-add-dish [restaurantId]=\"restaurant.id\" (dishAdded)=\"dishAdded($event)\"></dinner-add-dish>\r\n        <dinner-menucard-administration [restaurantId]=\"restaurant.id\" [dishes]=\"dishes\"></dinner-menucard-administration>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n  <hr>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -664,7 +676,7 @@ var RestaurantDetailComponent = (function () {
 /***/ "../../../../../AppSrc/app/admin/restaurant-tables/restaurant-tables.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n  <div class=\"card-deck\">\r\n\r\n      <div class=\"card bg-primary\" style=\"border-color: #333;\" *ngFor=\"let table of restaurantTables\">\r\n        <div class=\"card-body \">\r\n         <h5 class=\"card-title \"> Tisch {{table.tablenr}} </h5>\r\n        </div>\r\n      </div>\r\n  </div>\r\n\r\n"
+module.exports = "\r\n  <div class=\"card-deck\">\r\n\r\n      <div class=\"adminTableNumber\" *ngFor=\"let table of restaurantTables\">\r\n        <div>\r\n         <h5 class=\"card-title \"> Tisch {{table.tablenr}} </h5>\r\n        </div>\r\n      </div>\r\n  </div>"
 
 /***/ }),
 
@@ -862,7 +874,7 @@ var AppRoutingModule = (function () {
 /***/ "../../../../../AppSrc/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n    <a href=\"http://www.bridging-it.de/\" class=\"card-img-top\" >\r\n      <img src=\"assets/bitlogo.png\" width=\"200px\"/>\r\n    </a>\r\n  <div class=\"card-body\">\r\n    <h1>Microservices mit Azure Service Fabric:</h1>\r\n  </div>\r\n</div>\r\n\r\n<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item active\">\r\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/kitchens']\">Küche</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n          <a class=\"nav-link\" [routerLink]=\"['/admin']\">Admin</a>\r\n        </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link \" href=\"http://blog.bridging-it.de/author/Tobias.Meier\" _target=\"new\">Weitere Infos: http://blog.bridging-it-de/author/Tobias.Meier</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<div class=\"card\" id=\"header\"> \r\n  \r\n    <a href=\"http://www.bridging-it.de/\" class=\"card-img-top\" >\r\n      <img src=\"assets/bitlogo.png\"/> \r\n    </a><br/>\r\n    <h1>Microservices mit Azure Service Fabric:</h1>\r\n  </div>\r\n  \r\n <div class=\"container\"> \r\n\r\n  <nav class=\"navbar navbar-expand-lg navbar-light\">\r\n  <div  id=\"navbarSupportedContent\" class=\"col-md-12\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item active\">\r\n        <a class=\"nav-link\" routerLink=\"/\">Home <span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/kitchens']\">Küche</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n          <a class=\"nav-link\" [routerLink]=\"['/admin']\">Admin</a>\r\n        </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link \" href=\"http://blog.bridging-it.de/author/Tobias.Meier\" _target=\"new\">Weitere Infos</a>\r\n          <ul class=\"dropdown-menu\">\r\n            <a href=\"\" >: http://blog.bridging-it-de/author/Tobias.Meier</a>\r\n          </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav> <br/>\r\n\r\n\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -982,7 +994,11 @@ if (window != null && window.location != null) {
     var server = loc.hostname;
     var port = loc.port;
     if (server === 'localhost' && port === '4200') {
-        port = '8333';
+        //Falls der Client direkt aus VSCode mit dem Serverstand 6.1 verwendet wird, ist das Protokoll auf http zu ändern:
+        API_BASE_URL2 = "https://localhost:8333";
+    }
+    else {
+        API_BASE_URL2 = loc.protocol + '//' + server + ':' + port;
     }
 }
 var AppModule = (function () {
@@ -1033,7 +1049,7 @@ var AppModule = (function () {
 /***/ "../../../../../AppSrc/app/kitchen/kitchen/kitchen.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3><p>Offene Bestellungen</p></h3>\r\n<div class=\"card  mb-3\" style=\"max-width: 40rem;\" *ngFor=\"let order of kitchenQueue\">\r\n  <div class=\"card-body\">\r\n    <h3 class=\"card-title\">{{getDishname(order.dishId)}}</h3>    \r\n  </div>\r\n</div>\r\n\r\n<h3><p> Folgende Gerichte werden gerade gekocht:</p></h3>\r\n  <div class=\"card  mb-3\" style=\"max-width: 40rem;\" *ngFor=\"let order of cookingQueue\">\r\n    <div class=\"card-body\">\r\n      <h3 class=\"card-title\">{{getDishname(order.dishId)}}</h3>    \r\n    </div>\r\n  </div>\r\n\r\n"
+module.exports = "<div class=\"card-kitchen col-6\">\r\n<p><b>Offene Bestellungen:</b></p>\r\n<div *ngFor=\"let order of kitchenQueue\">\r\n  <div class=\"card-body\">\r\n    <h3 class=\"menue-title\">{{getDishname(order.dishId)}}</h3>    \r\n  </div>\r\n</div>\r\n</div>\r\n\r\n<div class=\"card-kitchen col-6\">\r\n<p><b> Folgende Gerichte werden gerade gekocht:</b></p>\r\n  <div *ngFor=\"let order of cookingQueue\">\r\n    <div class=\"card-body\">\r\n      <h3 class=\"menue-title\">{{getDishname(order.dishId)}}</h3>    \r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1280,7 +1296,7 @@ var SelectKitchenComponent = (function () {
 /***/ "../../../../../AppSrc/app/order-dish/order-dish.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p><b>Bitte wählen Sie ein Gericht aus:</b></p>\r\n\r\n<div class=\"card   mb-3\" style=\"max-width: 40rem;\" *ngFor=\"let dish of dishes\">\r\n\r\n  <div class=\"card-block \">\r\n    <img class=\"card-img-top\" [src]=\"dish.imageUrl\" [alt]=\"dish.name\">\r\n    <h5 class=\"card-title\" bg-primary> {{dish.name}}</h5>\r\n    <div class=\"card-text\">{{dish.description}} €</div>\r\n    <div class=\"card-text\">Preis: {{dish.price}} €</div>\r\n    <a class=\"btn btn-primary\" (click)=\"order(dish)\" role=\"button\">Bestellen</a>\r\n  </div>\r\n\r\n\r\n</div>\r\n{{message}}\r\n"
+module.exports = "<div class=\"container\">\r\n\r\n<p><b>Bitte wählen Sie ein Gericht aus:</b></p>\r\n<p class=\"selected-message\">{{message}}</p>\r\n\r\n\r\n<div class=\"card col-md-3 mb-3\" *ngFor=\"let dish of dishes\" id=\"card-dish\">\r\n  \r\n  <div class=\"card-select-dish\">\r\n    <a class=\"btn btn-primary\" (click)=\"order(dish)\" role=\"button\" id=\"button\">Bestellen</a>\r\n    <div class=\"menue-text\">Preis: {{dish.price}} €</div>\r\n    <img class=\"card-img-top dishimg\" [src]=\"dish.imageUrl\" [alt]=\"dish.name\">\r\n    <h3 class=\"menue-title\" bg-primary> {{dish.name}}</h3>\r\n    <div class=\"menue-text\">{{dish.description}}</div><br/>\r\n  </div>\r\n  \r\n  \r\n</div><br/>\r\n </div>\r\n\r\n"
 
 /***/ }),
 
@@ -1374,7 +1390,7 @@ var OrderDishComponent = (function () {
 /***/ "../../../../../AppSrc/app/order-status/order-status.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>Getätigte Bestellungen</p>\r\n<div class=\"card  bg-primary mb-3\" style=\"max-width: 40rem;\" *ngFor=\"let order of orders\">\r\n  <h3 class=\"card-title\">{{order.dish}}: {{order.state}}</h3>\r\n  <span class=\"card-text\">{{order.price}} €</span>\r\n</div>\r\n"
+module.exports = "<div class=\"container\"> \r\n  <p><b>Getätigte Bestellungen</b></p>\r\n  <div class=\"card col-md-5 mb-3\" *ngFor=\"let order of orders\">\r\n    <h3 class=\"menue-title\">{{order.dish}}: {{order.state}}</h3>\r\n    <span class=\"menue-text\">{{order.price}} €</span>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -1404,6 +1420,8 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_Controllers_generated__ = __webpack_require__("../../../../../AppSrc/app/shared/Controllers.generated.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1413,6 +1431,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1431,6 +1450,13 @@ var OrderStatusComponent = (function () {
             that.orders = orders;
         }, function (error) {
             console.log('Fehler beim Laden der Bestellungen des Tisches: ' + error);
+        });
+        __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__["Observable"].timer(10, 10).subscribe(function (data) {
+            that.orderClient.getOrders(that.tableId).subscribe(function (orders) {
+                that.orders = orders;
+            }, function (error) {
+                console.log('Fehler beim Laden der Bestellungen des Tisches: ' + error);
+            });
         });
     };
     OrderStatusComponent = __decorate([
@@ -1452,7 +1478,7 @@ var OrderStatusComponent = (function () {
 /***/ "../../../../../AppSrc/app/restaurant/restaurant.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 *ngIf=\"restaurant!=null\">{{restaurant.name}}<h2>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<div class=\"container\">\r\n<h2 *ngIf=\"restaurant!=null\" class=\"selected\">Restaurant: {{restaurant.name}}</h2><br/>\r\n</div>\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -1588,7 +1614,7 @@ var RestaurantsComponent = (function () {
 /***/ "../../../../../AppSrc/app/select-restaurant/select-restaurant.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p><b>Bitte wählen Sie ein Restaurant aus.</b></p>\r\n\r\n<div class=\"card  mb-3\" style=\"max-width: 40rem;\" *ngFor=\"let restaurant of restaurants\">\r\n  <div class=\"card-body\">\r\n    <h3 class=\"card-title\">{{restaurant.name}}</h3>\r\n    <a class=\"btn btn-primary\" [routerLink]=\"['/restaurants/', restaurant.id]\" role=\"button\">Auswählen</a>\r\n  </div>\r\n</div>\r\n"
+module.exports = "\r\n<div class=\"container\">\r\n  <p><b>Bitte wählen Sie ein Restaurant aus.</b></p>\r\n\r\n  <div class=\"card col-5  mb-3\" *ngFor=\"let restaurant of restaurants\">\r\n    <div class=\"card-select\">\r\n      <h3 class=\"card-title\">{{restaurant.name}}</h3>\r\n      <a class=\"btn btn-primary\" [routerLink]=\"['/restaurants/', restaurant.id]\" role=\"button\">Auswählen</a>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1659,7 +1685,7 @@ var SelectRestaurantComponent = (function () {
 /***/ "../../../../../AppSrc/app/select-table-in-restaurant/select-table-in-restaurant.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p><b>Bitte wählen Sie einen Tisch aus.</b></p>\r\n\r\n<div class=\"card mb-3\" style=\"max-width: 40rem;\" *ngFor=\"let table of tables\">\r\n    <div class=\"card-body\">\r\n  <h3 class=\"card-title\">Tisch {{table.tablenr}}</h3>\r\n  <a class=\"btn btn-primary\" [routerLink]=\"['/restaurants/', restaurantId, table.id]\"  role=\"button\">Auswählen</a>\r\n</div>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"container\">\r\n\r\n<p><b>Bitte wählen Sie einen Tisch aus.</b></p>\r\n<div class=\"row\"> \r\n  \r\n  <div class=\"card col-md-5 mb-3\" *ngFor=\"let table of tables\">\r\n    <div class=\"card-select\">\r\n      <h3 class=\"card-title\">Tisch {{table.tablenr}}</h3>\r\n      <a class=\"btn btn-primary\" [routerLink]=\"['/restaurants/', restaurantId, table.id]\"  role=\"button\">Auswählen</a>\r\n    </div>\r\n  </div>\r\n</div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1735,7 +1761,7 @@ var SelectTableInRestaurantComponent = (function () {
 /***/ "../../../../../AppSrc/app/selected-table/selected-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p *ngIf=\"table == true\">\r\n  Willkommen am Tisch {{table.tablenr}}\r\n</p>\r\n<a routerLink=\"order\" class=\"btn btn-primary\">Gericht auswählen</a> &nbsp;&nbsp;\r\n<a routerLink=\"status\" class=\"btn btn-primary\">Bestellungen</a>\r\n<br>\r\n\r\n\r\n<router-outlet></router-outlet>\r\n\r\n"
+module.exports = "<p *ngIf=\"table == true\">\r\n  Willkommen am Tisch {{table.tablenr}}\r\n</p>\r\n<div class=\"container\">  \r\n  <a routerLink=\"order\" class=\"btn btn-primary\">Gericht auswählen</a> &nbsp;&nbsp;\r\n  <a routerLink=\"status\" class=\"btn btn-primary\">Bestellungen</a>\r\n  \r\n</div><br/>\r\n\r\n\r\n<router-outlet></router-outlet>\r\n\r\n"
 
 /***/ }),
 
