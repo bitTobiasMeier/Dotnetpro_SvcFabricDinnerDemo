@@ -20,7 +20,7 @@ namespace SvcFabricDinnerDemo.RestaurantService.Tests
             var stateManager = new MockReliableStateManager();
             const string stateName = "RestaurantDictionaryName";
             var dic = await stateManager.GetOrAddAsync<IReliableDictionary<Guid, RestaurantService.RestaurantContract>>(stateName);
-            await dic.TryAddAsync(new MockTransaction(), restaurantId,
+            await dic.TryAddAsync(new MockTransaction(stateManager, 1), restaurantId,
                 new RestaurantService.RestaurantContract(restaurantId, restaurantName));
 
             IRestaurantService svc = new RestaurantService(context, stateManager);
