@@ -14,7 +14,8 @@ namespace SvcFabricDinnerDemo.KitchenActor.Interfaces
         {            
             using (var client = new FabricClient())
             {
-                var partitions = await client.QueryManager.GetPartitionListAsync(KitchenActorProxy.ServiceUrl);
+                var serviceUrl = new KitchenActorProxy().ServiceUrl;
+                var partitions = await client.QueryManager.GetPartitionListAsync(serviceUrl);
                 foreach (var partition in partitions)
                 {
                     if (partition.PartitionInformation.Kind != ServicePartitionKind.Int64Range)
@@ -25,7 +26,7 @@ namespace SvcFabricDinnerDemo.KitchenActor.Interfaces
                     if (!(partition.PartitionInformation is Int64RangePartitionInformation actorpartition)) throw new Exception("Unexpected partition type");
 
                     
-                    var actorServiceProxy = ActorServiceProxy.Create<IKitchenActorService>(KitchenActorProxy.ServiceUrl, actorpartition.LowKey);
+                    var actorServiceProxy = ActorServiceProxy.Create<IKitchenActorService>(serviceUrl, actorpartition.LowKey);
                     await actorServiceProxy.BackupActorsAsync(nameOfBackupset);
                 }
             }
@@ -35,7 +36,8 @@ namespace SvcFabricDinnerDemo.KitchenActor.Interfaces
         {
             using (var client = new FabricClient())
             {
-                var partitions = await client.QueryManager.GetPartitionListAsync(KitchenActorProxy.ServiceUrl);
+                var serviceUrl = new KitchenActorProxy().ServiceUrl;
+                var partitions = await client.QueryManager.GetPartitionListAsync(serviceUrl);
                 foreach (var partition in partitions)
                 {
                     if (partition.PartitionInformation.Kind != ServicePartitionKind.Int64Range)
@@ -45,7 +47,7 @@ namespace SvcFabricDinnerDemo.KitchenActor.Interfaces
 
                     if (!(partition.PartitionInformation is Int64RangePartitionInformation actorpartition)) throw new Exception("Unexpected partition type");
          
-                    var actorServiceProxy = ActorServiceProxy.Create<IKitchenActorService>(KitchenActorProxy.ServiceUrl, actorpartition.LowKey);
+                    var actorServiceProxy = ActorServiceProxy.Create<IKitchenActorService>(serviceUrl, actorpartition.LowKey);
                     await actorServiceProxy.RestoreActorsAsync(nameOfBackupset);
                 }
             }

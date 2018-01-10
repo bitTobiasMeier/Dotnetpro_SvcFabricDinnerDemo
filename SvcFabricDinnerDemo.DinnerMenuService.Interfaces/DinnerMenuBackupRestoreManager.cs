@@ -16,15 +16,13 @@ namespace SvcFabricDinnerDemo.DinnerMenuService.Interfaces
             var proxyFactory = new MenuServiceProxyFactory();
             using (var client = new FabricClient())
             {
-                var partitions = await client.QueryManager.GetPartitionListAsync(MenuServiceProxyFactory.Servicename);
+                var partitions = await client.QueryManager.GetPartitionListAsync(new MenuServiceProxyFactory().Servicename);
                 foreach (var partition in partitions)
                 {
-                   
                     var proxy = proxyFactory.CreateAdminServiceProxy(partition.PartitionInformation.Id);
                     await proxy.BackupServiceAsync(nameOfBackupset);
                 }
             }
-
         }
 
         public async Task RestoreFullBackupAsync(string nameOfBackupset)
@@ -32,10 +30,9 @@ namespace SvcFabricDinnerDemo.DinnerMenuService.Interfaces
             var proxyFactory = new MenuServiceProxyFactory();
             using (var client = new FabricClient())
             {
-                var partitions = await client.QueryManager.GetPartitionListAsync(MenuServiceProxyFactory.Servicename);
+                var partitions = await client.QueryManager.GetPartitionListAsync(new MenuServiceProxyFactory().Servicename);
                 foreach (var partition in partitions)
                 {
-
                     var proxy = proxyFactory.CreateAdminServiceProxy(partition.PartitionInformation.Id);
                     await proxy.RestoreServiceAsync(nameOfBackupset);
                 }

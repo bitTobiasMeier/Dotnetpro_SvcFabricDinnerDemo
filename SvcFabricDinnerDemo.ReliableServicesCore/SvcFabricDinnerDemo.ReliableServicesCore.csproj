@@ -136,8 +136,10 @@
     <Compile Include="IFileStore.cs" />
     <Compile Include="IFileStoreCreator.cs" />
     <Compile Include="IServiceEventSource.cs" />
+    <Compile Include="IServiceFabricUriBuilder.cs" />
     <Compile Include="LocalFileStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceFabricUriBuilder.cs" />
     <Compile Include="StatefulServiceContextExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

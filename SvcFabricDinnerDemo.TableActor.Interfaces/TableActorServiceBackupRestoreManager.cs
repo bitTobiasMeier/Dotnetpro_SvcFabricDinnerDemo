@@ -11,8 +11,9 @@ namespace SvcFabricDinnerDemo.TableActor.Interfaces
         public async Task TakeFullBackupAsync(string nameOfBackupset)
         {
             using (var client = new FabricClient())
-            {
-                var partitions = await client.QueryManager.GetPartitionListAsync(TableActorProxy.ServiceUrl);
+            { 
+                var serviceUrl = new TableActorProxy().ServiceUrl;
+                var partitions = await client.QueryManager.GetPartitionListAsync(serviceUrl);
                 foreach (var partition in partitions)
                 {
                     if (partition.PartitionInformation.Kind != ServicePartitionKind.Int64Range)
@@ -23,7 +24,7 @@ namespace SvcFabricDinnerDemo.TableActor.Interfaces
                     if (!(partition.PartitionInformation is Int64RangePartitionInformation actorpartition)) throw new Exception("Unexpected partition type");
 
 
-                    var actorServiceProxy = ActorServiceProxy.Create<ITableActorService>(TableActorProxy.ServiceUrl, actorpartition.LowKey);
+                    var actorServiceProxy = ActorServiceProxy.Create<ITableActorService>(serviceUrl, actorpartition.LowKey);
                     await actorServiceProxy.BackupActorsAsync(nameOfBackupset);
                 }
             }
@@ -33,7 +34,8 @@ namespace SvcFabricDinnerDemo.TableActor.Interfaces
         {
             using (var client = new FabricClient())
             {
-                var partitions = await client.QueryManager.GetPartitionListAsync(TableActorProxy.ServiceUrl);
+                var serviceUrl = new TableActorProxy().ServiceUrl;
+                var partitions = await client.QueryManager.GetPartitionListAsync(serviceUrl);
                 foreach (var partition in partitions)
                 {
                     if (partition.PartitionInformation.Kind != ServicePartitionKind.Int64Range)
@@ -43,7 +45,7 @@ namespace SvcFabricDinnerDemo.TableActor.Interfaces
 
                     if (!(partition.PartitionInformation is Int64RangePartitionInformation actorpartition)) throw new Exception("Unexpected partition type");
 
-                    var actorServiceProxy = ActorServiceProxy.Create<ITableActorService>(TableActorProxy.ServiceUrl, actorpartition.LowKey);
+                    var actorServiceProxy = ActorServiceProxy.Create<ITableActorService>(serviceUrl, actorpartition.LowKey);
                     await actorServiceProxy.RestoreActorsAsync(nameOfBackupset);
                 }
             }

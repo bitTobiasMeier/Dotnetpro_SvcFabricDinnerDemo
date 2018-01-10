@@ -1,12 +1,29 @@
 ﻿using System;
 using Microsoft.ServiceFabric.Services.Client;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 
 namespace SvcFabricDinnerDemo.DinnerMenuService.Interfaces
 {
+
+
     public class MenuServiceProxyFactory
     {
-        public static Uri Servicename { get; } = new Uri("fabric:/SvcFabricDinnerDemo/DinnerMenuService");
+        private static readonly string _localservicename = "DinnerMenuService";
+        private readonly Uri _servicename;
+
+        public MenuServiceProxyFactory() : this(new ServiceFabricUriBuilder()) { }
+
+        public MenuServiceProxyFactory(IServiceFabricUriBuilder serviceFabricUriBuilder)
+        {
+            this._servicename = serviceFabricUriBuilder.Build(_localservicename);
+        }
+
+        public Uri Servicename
+        {
+            get { return _servicename; }
+        }
+
 
         public IDinnerMenuService CreateServiceProxy(Guid restaurantId)
         {
