@@ -1,2 +1,3 @@
-# Basta2017_SvcFabric_Lab
-Service Fabric Example of the lab at BASTA! 2017 in Mainz (Germany)
+# Dinner Demo
+Beispielapplikation zum Artikel "Azure Service Fabric in der Tiefe" in der dotnetpro 2/18
+
