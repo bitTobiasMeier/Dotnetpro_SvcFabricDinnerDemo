@@ -22,5 +22,4 @@
   -->
   <ClusterConnectionParameters ConnectionEndpoint="svfabricdemo1.westeurope.cloudapp.azure.com:19000" X509Credential="true" ServerCertThumbprint="2B5C7A6BDFCE84CC7559977375D384494CC3D2A5" FindType="FindByThumbprint" FindValue="2B5C7A6BDFCE84CC7559977375D384494CC3D2A5" StoreLocation="CurrentUser" StoreName="My" />
   <ApplicationParameterFile Path="..\ApplicationParameters\Cloud.xml" />
-  <CopyPackageParameters CompressPackage="true" />
 </PublishProfile>

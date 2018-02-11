@@ -24,7 +24,7 @@ namespace SvcFabricDinnerDemo.RestaurantService.Tests
             var mockBackupStore = new Mock<IFileStore>();
             var mockEventSource = new Mock<IServiceEventSource>();
             var dic = await stateManager.GetOrAddAsync<IReliableDictionary<Guid, RestaurantService.RestaurantContract>>(stateName);
-            await dic.TryAddAsync(new MockTransaction(), restaurantId,
+            await dic.TryAddAsync(new MockTransaction(stateManager, 0), restaurantId,
                 new RestaurantService.RestaurantContract(restaurantId, restaurantName));
 
             IRestaurantService svc = new RestaurantService(context, stateManager,mockBackupStore.Object,mockEventSource.Object);
