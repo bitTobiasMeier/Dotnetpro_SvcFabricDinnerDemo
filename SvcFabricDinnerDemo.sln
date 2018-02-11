@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "SvcFabricDinnerDemo", "SvcFabricDinnerDemo\SvcFabricDinnerDemo.sfproj", "{A92E480A-DC3F-4E03-A13C-21EED7E2F7CC}"
 EndProject
@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvcFabricDinnerDemo.Kitchen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvcFabricDinnerDemo.ReliableServicesCore", "SvcFabricDinnerDemo.ReliableServicesCore\SvcFabricDinnerDemo.ReliableServicesCore.csproj", "{9ADC58AB-ABAA-4D4F-8524-0F4080247D80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvcFabricDinnerDemo.AdminPlatform", "SvcFabricDinnerDemo.AdminPlatform\SvcFabricDinnerDemo.AdminPlatform.csproj", "{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvcFabricDinnerDemo.AdminPlatform", "SvcFabricDinnerDemo.AdminPlatform\SvcFabricDinnerDemo.AdminPlatform.csproj", "{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,12 +137,12 @@ Global
 		{9ADC58AB-ABAA-4D4F-8524-0F4080247D80}.Release|x64.Build.0 = Release|x64
 		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Debug|x64.Build.0 = Debug|Any CPU
+		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Debug|x64.ActiveCfg = Debug|x64
+		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Debug|x64.Build.0 = Debug|x64
 		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Release|x64.ActiveCfg = Release|Any CPU
-		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Release|x64.Build.0 = Release|Any CPU
+		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Release|x64.ActiveCfg = Release|x64
+		{B7E5143D-C547-4D32-B4AB-66BB4F575FF0}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
