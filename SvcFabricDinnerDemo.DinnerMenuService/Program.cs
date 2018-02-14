@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Data;
 using Microsoft.ServiceFabric.Services.Runtime;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 
 namespace SvcFabricDinnerDemo.DinnerMenuService
 {
@@ -26,7 +27,9 @@ namespace SvcFabricDinnerDemo.DinnerMenuService
                     delegate (StatefulServiceContext context)
                     {
                         var stateMngr = new ReliableStateManager(context);
-                        return new DinnerMenuService(context, new DishStateManager(stateMngr), stateMngr);
+                        var backupStore = new FileStoreCreator().CreateFileStore(context);
+                        return new DinnerMenuService(context, new DishStateManager(stateMngr), stateMngr,
+                            backupStore,ServiceEventSource.Current);
                     }).GetAwaiter().GetResult();
 
 

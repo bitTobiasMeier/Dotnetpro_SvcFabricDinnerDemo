@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="SvcFabricDinnerDemoType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
+    <Parameter Name="AdminPlatform_InstanceCount" DefaultValue="1" />
+    <Parameter Name="DinnerPlatform_InstanceCount" DefaultValue="1" />
     <Parameter Name="DinnerMenuService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="DinnerMenuService_PartitionCount" DefaultValue="3" />
     <Parameter Name="DinnerMenuService_TargetReplicaSetSize" DefaultValue="3" />
     <Parameter Name="RestaurantService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="RestaurantService_PartitionCount" DefaultValue="1" />
     <Parameter Name="RestaurantService_TargetReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="DinnerPlatform_InstanceCount" DefaultValue="1" />
     <Parameter Name="OrderActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="OrderActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="OrderActorService_TargetReplicaSetSize" DefaultValue="3" />
@@ -18,17 +19,44 @@
     <Parameter Name="KitchenActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="KitchenActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="KitchenActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="BackupDirectory" DefaultValue="c:\temp\dotnetpro_svcfabricdinnerdemo\" />
+    <Parameter Name="AzureStorageConnectionString" DefaultValue="" />
+    <Parameter Name="BackupRestoreFileStoreType" DefaultValue="local" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
        ServiceManifest.xml file. -->
   <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="DinnerMenuServicePkg" ServiceManifestVersion="1.0.0" />
+    <ServiceManifestRef ServiceManifestName="AdminPlatformPkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides />
   </ServiceManifestImport>
   <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="DinnerMenuServicePkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBackupRestore">
+            <Parameter Name="BackupDirectory" Value="[BackupDirectory]" />
+            <Parameter Name="AzureStorageConnectionString" Value="[AzureStorageConnectionString]" />
+            <Parameter Name="BackupRestoreFileStoreType" Value="[BackupRestoreFileStoreType]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+  </ServiceManifestImport>
+  <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="RestaurantServicePkg" ServiceManifestVersion="1.0.0" />
-    <ConfigOverrides />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBackupRestore">
+            <Parameter Name="BackupDirectory" Value="[BackupDirectory]" />
+            <Parameter Name="AzureStorageConnectionString" Value="[AzureStorageConnectionString]" />
+            <Parameter Name="BackupRestoreFileStoreType" Value="[BackupRestoreFileStoreType]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="DinnerPlatformPkg" ServiceManifestVersion="1.0.0" />
@@ -39,12 +67,45 @@
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="SvcFabricDinnerDemo.OrderActorPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBackupRestore">
+            <Parameter Name="BackupDirectory" Value="[BackupDirectory]" />
+            <Parameter Name="AzureStorageConnectionString" Value="[AzureStorageConnectionString]" />
+            <Parameter Name="BackupRestoreFileStoreType" Value="[BackupRestoreFileStoreType]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="SvcFabricDinnerDemo.KitchenActorPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBackupRestore">
+            <Parameter Name="BackupDirectory" Value="[BackupDirectory]" />
+            <Parameter Name="AzureStorageConnectionString" Value="[AzureStorageConnectionString]" />
+            <Parameter Name="BackupRestoreFileStoreType" Value="[BackupRestoreFileStoreType]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="SvcFabricDinnerDemo.TableActorPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="ServiceBackupRestore">
+            <Parameter Name="BackupDirectory" Value="[BackupDirectory]" />
+            <Parameter Name="AzureStorageConnectionString" Value="[AzureStorageConnectionString]" />
+            <Parameter Name="BackupRestoreFileStoreType" Value="[BackupRestoreFileStoreType]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
   </ServiceManifestImport>
   <DefaultServices>
     <!-- The section below creates instances of service types, when an instance of this 
@@ -52,6 +113,11 @@
          ServiceFabric PowerShell module.
          
          The attribute ServiceTypeName below must match the name defined in the imported ServiceManifest.xml file. -->
+    <Service Name="AdminPlatform" ServicePackageActivationMode="ExclusiveProcess">
+      <StatelessService ServiceTypeName="AdminPlatformType" InstanceCount="[AdminPlatform_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
     <Service Name="DinnerMenuService">
       <StatefulService ServiceTypeName="DinnerMenuServiceType" TargetReplicaSetSize="[DinnerMenuService_TargetReplicaSetSize]" MinReplicaSetSize="[DinnerMenuService_MinReplicaSetSize]">
         <UniformInt64Partition PartitionCount="[DinnerMenuService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />

@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="fabric:/SvcFabricDinnerDemo" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
-    <Parameter Name="DinnerMenuService_PartitionCount" Value="1" />
+    <Parameter Name="AdminPlatform_InstanceCount" Value="-1" />
+    <Parameter Name="DinnerPlatform_InstanceCount" Value="-1" />
+    <Parameter Name="DinnerMenuService_PartitionCount" Value="5" />
     <Parameter Name="DinnerMenuService_MinReplicaSetSize" Value="3" />
     <Parameter Name="DinnerMenuService_TargetReplicaSetSize" Value="3" />
     <Parameter Name="RestaurantService_PartitionCount" Value="1" />
     <Parameter Name="RestaurantService_MinReplicaSetSize" Value="3" />
     <Parameter Name="RestaurantService_TargetReplicaSetSize" Value="3" />
-    <Parameter Name="X509FindValue" Value="FFCBD3A491B382111480DE4AD8F62BB4F9199A6D" />
+    <Parameter Name="X509FindValue" Value="2b5c7a6bdfce84cc7559977375d384494cc3d2a5" />
+    <Parameter Name="BackupRestoreFileStoreType" Value="azureblobstorage" />
+    <Parameter Name="AzureStorageConnectionString" Value="#{backupazurestorageconnectionstring}#" />
   </Parameters>
 </Application>

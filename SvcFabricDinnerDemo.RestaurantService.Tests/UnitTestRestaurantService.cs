@@ -3,7 +3,9 @@ using System.Fabric;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using ServiceFabric.Mocks;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 using SvcFabricDinnerDemo.RestaurantService.Interfaces;
 
 namespace SvcFabricDinnerDemo.RestaurantService.Tests
@@ -19,11 +21,13 @@ namespace SvcFabricDinnerDemo.RestaurantService.Tests
             var context = MockStatefulServiceContextFactory.Default;
             var stateManager = new MockReliableStateManager();
             const string stateName = "RestaurantDictionaryName";
+            var mockBackupStore = new Mock<IFileStore>();
+            var mockEventSource = new Mock<IServiceEventSource>();
             var dic = await stateManager.GetOrAddAsync<IReliableDictionary<Guid, RestaurantService.RestaurantContract>>(stateName);
             await dic.TryAddAsync(new MockTransaction(), restaurantId,
                 new RestaurantService.RestaurantContract(restaurantId, restaurantName));
 
-            IRestaurantService svc = new RestaurantService(context, stateManager);
+            IRestaurantService svc = new RestaurantService(context, stateManager,mockBackupStore.Object,mockEventSource.Object);
 
             var restaurant = await svc.GetRestaurantAsync(restaurantId);
             Assert.IsNotNull(restaurant);

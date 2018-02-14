@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Fabric;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 
 namespace SvcFabricDinnerDemo.RestaurantService
 {
@@ -21,7 +23,11 @@ namespace SvcFabricDinnerDemo.RestaurantService
                 // an instance of the class is created in this host process.
 
                 ServiceRuntime.RegisterServiceAsync("RestaurantServiceType",
-                    context => new RestaurantService(context)).GetAwaiter().GetResult();
+                    delegate(StatefulServiceContext context)
+                    {
+                        var backupStore = new FileStoreCreator().CreateFileStore(context);
+                        return new RestaurantService(context,backupStore, ServiceEventSource.Current);
+                    }).GetAwaiter().GetResult();
 
                 ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(RestaurantService).Name);
 

@@ -1,19 +1,31 @@
 ﻿using System;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 
 namespace SvcFabricDinnerDemo.KitchenActor.Interfaces
 {
     public class KitchenActorProxy
     {
+        private readonly string InternalServiceName = "KitchenActorService";
+        private readonly Uri _serviceUrl;
 
-        private readonly Uri _servicename = new Uri("fabric:/SvcFabricDinnerDemo/KitchenActorService");
+        public KitchenActorProxy() : this (new ServiceFabricUriBuilder()) { }
+        public KitchenActorProxy(IServiceFabricUriBuilder serviceFabricUriBuilder)
+        {
+            this._serviceUrl = serviceFabricUriBuilder.Build(this.InternalServiceName);
+        }
+
+        public Uri ServiceUrl
+        {
+            get { return this._serviceUrl; }
+        }
 
 
         public IKitchenActor CreateActor(Guid orderId)
         {
             var actorId = new ActorId(orderId);
-            return ActorProxy.Create<IKitchenActor>(actorId, this._servicename);
+            return ActorProxy.Create<IKitchenActor>(actorId, ServiceUrl);
         }
     }
 }

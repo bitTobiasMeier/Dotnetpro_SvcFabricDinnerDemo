@@ -1,0 +1,117 @@
+using System;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.ServiceFabric.Data;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+
+namespace SvcFabricDinnerDemo.ReliableServicesCore
+{
+    public class AzureBlobStorageStore : IFileStore
+    {
+        private readonly AzureBackupRestoreConfiguration _backupRestoreConfiguration;
+        private readonly CloudBlobClient _blobClient;
+        private readonly string _partitionName;
+        private readonly string _systemservicename;
+        private readonly string _temporaryDirectory;
+
+        public AzureBlobStorageStore(AzureBackupRestoreConfiguration backupRestoreConfiguration,
+            string systemservicename, string partitionName, string temporaryDirectory)
+        {
+            _backupRestoreConfiguration = backupRestoreConfiguration;
+            _systemservicename = systemservicename;
+            _partitionName = partitionName;
+            _temporaryDirectory = temporaryDirectory;
+       
+            CloudStorageAccount storageAccount = 
+                 CloudStorageAccount.Parse(_backupRestoreConfiguration.BackupStorageConnectionString);
+
+            _blobClient = storageAccount.CreateCloudBlobClient();
+        }
+
+        public async Task<bool> PerformBackupAsync(BackupInfo backupInfo, CancellationToken cancellationToken,
+            string backupName)
+        {
+            var fullArchiveDirectory = Path.Combine(_temporaryDirectory, _systemservicename,  _partitionName, backupName);
+
+            var fullArchiveDirectoryInfo = new DirectoryInfo(fullArchiveDirectory);
+            fullArchiveDirectoryInfo.Create();
+
+            var blobName = $"{backupName}_{_partitionName}_{"Backup.zip"}";
+            var fullArchivePath = Path.Combine(fullArchiveDirectory, "Backup.zip");
+
+            ZipFile.CreateFromDirectory(backupInfo.Directory, fullArchivePath, CompressionLevel.Fastest, false);
+
+            var backupDirectory = new DirectoryInfo(backupInfo.Directory);
+            backupDirectory.Delete(true);
+
+            var container = GetBlobContainer();
+            var blob = container.GetBlockBlobReference(blobName);
+            await blob.UploadFromFileAsync(fullArchivePath, CancellationToken.None);
+
+            var tempDirectory = new DirectoryInfo(fullArchiveDirectory);
+            tempDirectory.Delete(true);
+            return true;
+        }
+
+        public void WriteRestoreInformation(string nameOfBackupSet)
+        {
+            var blobName = $"{nameOfBackupSet}_{_partitionName}_{"Backup.zip"}";
+            var container = GetBlobContainer();
+            var lastBackupBlob = container.GetBlockBlobReference(blobName);
+
+            var fullArchiveDirectory = Path.Combine(_temporaryDirectory, "restore", _systemservicename, _partitionName, nameOfBackupSet);
+
+            var fullArchiveDirectoryInfo = new DirectoryInfo(fullArchiveDirectory);
+            fullArchiveDirectoryInfo.Create();
+
+
+            string downloadId = Guid.NewGuid().ToString("N");
+
+            string zipPath = Path.Combine(fullArchiveDirectory, $"{downloadId}_Backup.zip");
+
+            lastBackupBlob.DownloadToFile(zipPath, FileMode.CreateNew);
+
+            string restorePath = Path.Combine(fullArchiveDirectory, downloadId);
+
+            ZipFile.ExtractToDirectory(zipPath, restorePath);
+
+            FileInfo zipInfo = new FileInfo(zipPath);
+            zipInfo.Delete();
+
+            var restoreDir = Path.Combine(_temporaryDirectory, "restore", _systemservicename);
+            File.WriteAllText(Path.Combine(restoreDir, this._partitionName + ".restoreinfo"), nameOfBackupSet + "\n" + downloadId);
+        }
+
+        public string GetRestoreDirectory()
+        {
+            var restoreDir = Path.Combine(_temporaryDirectory, "restore", _systemservicename);
+            var metadata = File.ReadAllText(Path.Combine(restoreDir, this._partitionName + ".restoreinfo"));
+            var data = metadata.Split('\n');
+            var nameOfBackupSet = data.FirstOrDefault();
+            var downloadId = data.Last();
+            var restorepath = Path.Combine(_temporaryDirectory, "restore", _systemservicename, _partitionName, nameOfBackupSet,downloadId);
+            return restorepath;
+        }
+
+        private CloudBlobContainer GetBlobContainer()
+        {
+            try
+            {
+                var container =
+                    _blobClient.GetContainerReference((_systemservicename.ToLowerInvariant()).Replace("_","-"));
+                container.CreateIfNotExists();
+
+                return container;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Write(ex.Message);
+            }
+            return null;
+        }
+    }
+}

@@ -7,5 +7,10 @@
   <Section Name="TableActorServiceReplicatorSecurityConfig">
     <Parameter Name="CredentialType" Value="None" />
   </Section>
+  <Section Name="ServiceBackupRestore">
+    <Parameter Name="BackupDirectory" Value="None" />
+    <Parameter Name="AzureStorageConnectionString" Value="" />
+    <Parameter Name="BackupRestoreFileStoreType" Value="local" />
+  </Section>
   <!-- The content will be generated during build -->
 </Settings>

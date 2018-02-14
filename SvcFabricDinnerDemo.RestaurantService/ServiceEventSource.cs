@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 
 namespace SvcFabricDinnerDemo.RestaurantService
 {
     [EventSource(Name = "MyCompany-SvcFabricDinnerDemo-SvcFabricDinnerDemo.RestaurantService")]
-    internal sealed class ServiceEventSource : EventSource
+    internal sealed class ServiceEventSource : EventSource, IServiceEventSource
     {
         public static readonly ServiceEventSource Current = new ServiceEventSource();
 

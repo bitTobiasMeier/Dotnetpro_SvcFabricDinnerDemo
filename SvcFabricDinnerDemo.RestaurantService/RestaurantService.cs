@@ -10,6 +10,7 @@ using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting.Runtime;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 using SvcFabricDinnerDemo.RestaurantService.Interfaces;
 
 namespace SvcFabricDinnerDemo.RestaurantService
@@ -17,20 +18,20 @@ namespace SvcFabricDinnerDemo.RestaurantService
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    public sealed class RestaurantService : StatefulService, IRestaurantService, IRestaurantAdminService
+    public sealed class RestaurantService : BackupRestoreStatefulService, IRestaurantService, IRestaurantAdminService
     {
         private const string RestaurantDictionaryName = "RestaurantDictionaryName ";
         private const string RestaurantTablesDictionaryName = "RestaurantTablesDictionaryName ";
 
 
-        public RestaurantService(StatefulServiceContext context)
-            : base(context)
+        public RestaurantService(StatefulServiceContext context, IFileStore fileStore, IServiceEventSource serviceEventSource)
+            : base(context,fileStore, serviceEventSource)
         {
         }
 
         public RestaurantService(StatefulServiceContext serviceContext,
-            IReliableStateManagerReplica2 reliableStateManagerReplica)
-            : base(serviceContext, reliableStateManagerReplica)
+            IReliableStateManagerReplica2 reliableStateManagerReplica, IFileStore fileStore, IServiceEventSource serviceEventSource)
+            : base(serviceContext, reliableStateManagerReplica, fileStore,serviceEventSource)
         {
         }
 

@@ -102,10 +102,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SvcFabricDinnerDemo.ReliableServicesCore\SvcFabricDinnerDemo.ReliableServicesCore.csproj">
+      <Project>{9adc58ab-abaa-4d4f-8524-0f4080247d80}</Project>
+      <Name>SvcFabricDinnerDemo.ReliableServicesCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SvcFabricDinnerDemo.RestaurantService.Interfaces\SvcFabricDinnerDemo.RestaurantService.Interfaces.csproj">
       <Project>{66fc8a86-d948-45c0-a546-f3ab0d6ae3b1}</Project>
       <Name>SvcFabricDinnerDemo.RestaurantService.Interfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

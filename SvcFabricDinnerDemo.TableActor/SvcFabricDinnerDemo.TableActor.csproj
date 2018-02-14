@@ -101,6 +101,7 @@
     <Compile Include="TableActor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ActorEventSource.cs" />
+    <Compile Include="TableActorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PackageRoot\ServiceManifest.xml" />
@@ -112,6 +113,10 @@
     <ProjectReference Include="..\SvcFabricDinnerDemo.OrderActor.Interfaces\SvcFabricDinnerDemo.OrderActor.Interfaces.csproj">
       <Project>{bf029221-9704-4c1d-8072-0ad3b37d1699}</Project>
       <Name>SvcFabricDinnerDemo.OrderActor.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SvcFabricDinnerDemo.ReliableServicesCore\SvcFabricDinnerDemo.ReliableServicesCore.csproj">
+      <Project>{9adc58ab-abaa-4d4f-8524-0f4080247d80}</Project>
+      <Name>SvcFabricDinnerDemo.ReliableServicesCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\SvcFabricDinnerDemo.TableActor.Interfaces\SvcFabricDinnerDemo.TableActor.Interfaces.csproj">
       <Project>{80CE2775-258C-4961-9A65-3B748DB85399}</Project>

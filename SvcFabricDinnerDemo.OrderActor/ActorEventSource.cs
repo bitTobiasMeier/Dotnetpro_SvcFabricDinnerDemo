@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Actors.Runtime;
+using SvcFabricDinnerDemo.ReliableServicesCore;
 
 namespace SvcFabricDinnerDemo.OrderActor
 {
     [EventSource(Name = "MyCompany-SvcFabricDinnerDemo-SvcFabricDinnerDemo.OrderActor")]
-    internal sealed class ActorEventSource : EventSource
+    internal sealed class ActorEventSource : EventSource, IServiceEventSource
     {
         public static readonly ActorEventSource Current = new ActorEventSource();
 

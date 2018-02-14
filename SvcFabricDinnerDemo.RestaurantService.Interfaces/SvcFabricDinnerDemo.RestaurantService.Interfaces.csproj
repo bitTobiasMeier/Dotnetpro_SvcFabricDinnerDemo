@@ -105,15 +105,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRestaurantBackupRestoreManager.cs" />
     <Compile Include="Restaurant.cs" />
     <Compile Include="IRestaurantAdminService.cs" />
     <Compile Include="IRestaurantService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestaurantBackupRestoreManager.cs" />
     <Compile Include="RestaurantServiceProxyFactory.cs" />
     <Compile Include="RestaurantTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SvcFabricDinnerDemo.ReliableServicesCore\SvcFabricDinnerDemo.ReliableServicesCore.csproj">
+      <Project>{9ADC58AB-ABAA-4D4F-8524-0F4080247D80}</Project>
+      <Name>SvcFabricDinnerDemo.ReliableServicesCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
